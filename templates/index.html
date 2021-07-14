@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+ {% block title %}Make Your Work{% endblock title%}
+
+ {% block body %} 
+
+<div class="container my-2">
+<h2>Add Your Work</h2>
+<form method="POST" action="/">
+{% csrf_token %}
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Title</label>
+    <input type="text" class="form-control" name="title" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Description</label>
+    <input type="text" class="form-control" name="desc" id="exampleInputPassword1" required>
+  </div>
+  
+  <button type="submit" class="btn btn-outline-success">Add</button>
+</form>
+
+
+
+
+{% comment %} table {% endcomment %}
+
+
+    {% if values|length == 0 %}
+    <h3 class="my-3">Your Tasks</h3>
+        <div class="alert alert-info my-3" role="alert">
+        
+  No Records. Add Your Tasks.
+</div>
+    {% else %}
+
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">sno</th>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Time</th>
+      <th scope="col">
+      Actions
+      </th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    
+   
+
+   {% for v in values %}
+    <tr>
+    
+      <th scope="row">{{ forloop.counter }}</th>
+     
+      <td>{{v.title}}</td>
+      <td>{{v.desc}}</td>
+      <td>{{v.time}}</td>
+      <td>
+
+      
+      {% comment %} <a style="text-decoration:none;" type="button" href="/update" class="tn btn-outline-dark btn-sm mx-1">Update</button>
+      <a style="text-decoration:none;" type="button" href="/" class="tn btn-outline-dark btn-sm mx-1">Delete</button> {% endcomment %}
+      <a href="/update/{{v.sno}}" type="button" class="btn btn-outline-secondary btn-sm mx-2 my-1">Update</a>
+      <a href="/delete/{{v.sno}}" type="button" class="btn btn-outline-dark btn-sm mx-2 my-1">Delete</a>
+      
+      </td>
+    
+    </tr>
+    {% endfor %}
+     {% endif %}
+    
+      
+    
+    
+  </tbody>
+</table>
+
+
+
+{% endblock body%}
