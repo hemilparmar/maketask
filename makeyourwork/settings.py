@@ -28,7 +28,7 @@ DEBUG = False
 
 
 
-ALLOWED_HOSTS = ['https://makeyourworks.herokuapp.com',
+ALLOWED_HOSTS = ['https://maketasks.herokuapp.com',
 'localhost',
 '127.0.0.1']
 
